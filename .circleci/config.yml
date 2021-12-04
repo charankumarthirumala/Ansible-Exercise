@@ -5,22 +5,7 @@ version: 2.1
 # Define a job to be invoked later in a workflow.
 # See: https://circleci.com/docs/2.0/configuration-reference/#jobs
 jobs:
-#  configure_infrastructure: 
-    docker:
-      - image: python:3.7-alpine3.11
-    steps:
-      - checkout
-      - add_ssh_keys:
-          fingerprints: ["bc:56:d7:46:4f:4c:08:c2:3c:43:51:38:8e:73:0a:bc"] # You can get this ID in the section where you registered the SSH Key
-      - run:
-          name: Install dependencies
-          command: |
-            # install the dependencies needed for your playbook
-            apk add --update ansible 
-      - run:
-          name: Configure server
-          command: |
-            ansible-playbook -i inventory main-remote.yml
+
 smoke_test:
  docker:
    - image: alpine:latest
@@ -42,5 +27,4 @@ smoke_test:
 workflows:
   Ansible-exercise:
     jobs:
-#      - configure_infrastructure
       - smoke_test       
